@@ -18,12 +18,16 @@ npm run build
 npm run build --report
 ```
 
-## Vue-cli快速构建Vue项目66666
+## Vue-cli快速构建Vue项目666667777
 
 ``` bash
 # 安装vue-cli之前，需要先装好vue 和 webpack
 npm install -g vue      //全局安装vue
 npm install -g webpack  //全局安装webpack
+
+
+
+
 npm install -g vue-cli  //全局安装vue-cli
 
 # 使用vue-cli构建vue项目
