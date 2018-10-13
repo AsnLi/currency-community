@@ -1,6 +1,6 @@
-# sophon-web
+# vue-shop
 
-> the sophon web project base on Vue.js
+> the shop web project base on Vue.js
 
 ## Build Setup
 *You need to install node*
