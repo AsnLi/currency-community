@@ -1,11 +1,13 @@
 <template>
-  <div class="header">
+  <nav>
     <ul>
         <li v-for="item in headerlist" :key="item.path">
-            <router-link :to="{ path: item.path }" >{{item.title}}</router-link>
+            <router-link :to="{ path: item.path }" 
+                         tag="span" 
+                         exact-active-class = "_active">{{item.title}}</router-link>
         </li>
     </ul>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -18,20 +20,23 @@
     data(){
       return {
         headerlist: [{
-            path: '/firststep',
-            title: '第一步'
+            path: '/fastnews',
+            title: '快讯'
           },
           {
             path: '/secondstep',
-            title: '第二步'
+            title: '深度'
           },
           {
             path: '/threestep',
-            title: '第三步'
+            title: '事件'
           },
           {
             path: '/fourstep',
-            title: '第四步'
+            title: '圈子'
+          },{
+            path: '/quotes_all',
+            title: '行情'
           }]
       }
     },
@@ -41,22 +46,17 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-  h1, h2 {
-    font-weight: normal;
+<style lang="stylus" scoped>
+  nav > ul {
+    margin 0;
+    padding 0;
+    > li {
+       display: inline-block;
+    }
+    ._active {
+      color: rgb(52, 143, 249);
+      border-bottom: 1px solid rgb(52, 143, 249);
+    }
   }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-
-  li {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  a {
-    color: #42b983;
-  }
 </style>

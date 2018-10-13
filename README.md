@@ -1,8 +1,9 @@
-# vue-cli-demo
+# sophon-web
 
-> A Vue.js project
+> the sophon web project base on Vue.js
 
 ## Build Setup
+*You need to install node*
 
 ``` bash
 # install dependencies
@@ -18,69 +19,48 @@ npm run build
 npm run build --report
 ```
 
-## Vue-cli快速构建Vue项目666667777
+## 项目结构
+大部分代码存放于src文件夹下，src文件夹下主要有：
 
-``` bash
-# 安装vue-cli之前，需要先装好vue 和 webpack
-npm install -g vue      //全局安装vue
-npm install -g webpack  //全局安装webpack
+* api
 
+> 作为客户端的service层，负责与后台服务交互。每一个模块的接口存放于对应的api文件里，***新增服务模块后需要在api.js里面引入***。
 
+* assets
 
+> 存放项目的资源文件（图片、音视频等）、样式文件等。***图片资源统一存放于images目录下，不同模块图片资源分文件夹管理***。
 
-npm install -g vue-cli  //全局安装vue-cli
+* common
 
-# 使用vue-cli构建vue项目
-vue init webpack vue-cli-demo   //vue-cli-demo为你的vue项目的名词
-cd vue-cli-demo
-npm install
+> 存放工具类文件
 
-# 启动vue
-npm run dev
-浏览器会自动打开http://localhost:8080
+* components
 
-# 生产环境
-npm run build
-会生成静态文件到dist里边
+> 存放组件，***每添加一个组件，需要在该文件夹下index.js里面按照示例引入***，每个组件分模块存放。
 
-```
+> 一个标准的vue组件，包含三个部分，一个是模板，一个是script，一个是样式，这里需要了解vue的基础。
 
-## Mock 模拟数据
+* pages
 
-``` bash
-# 1、全局安装
-npm install -g json-server
+> 存放页面，***每添加一个页面，需要在路由文件夹下的路由文件里进行配置***，每个页面分模块存放。
 
-# 2、项目下创建mock文件夹
-/mock
+* router
 
-# 3、mock文件夹下添加db.json文件，内容如下：
-{
-  "test": {
-    "title" : "I'm title"
-  }
-}
+> 基于vue-router（<https://router.vuejs.org/zh-cn/>）的路由文件夹，负责页面跳转。
 
-# 4、package.json添加命令：
-"mock": "json-server --watch mock/db.json",
-"mockdev": "npm run mock & npm run dev"
+* store
 
-# 5、启动mock服务
-npm run mock
-访问http://localhost:3000/test
-可以访问已经创建的db.json里的数据
+> 基于vuex（<https://vuex.vuejs.org/zh-cn/>）的全局的状态管理。
 
-# 6、设置代理
-在config下的index.js文件夹下设置如下：
-proxyTable: {
-  '/api':{
-    target:'//localhost:3000/',
-    changeOrigin:true,
-    pathRewrite:{
-      '^/api':''
-    }
-  }
-}
-这样就能代理'/api'的3000端口的请求到8080端口
-```
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+* App.vue
+
+> App组件
+
+* Constant.js
+
+> 全局的常量，建议把所有需要定义的常量全放于该文件中。
+
+* main.js
+
+> 入口文件
+

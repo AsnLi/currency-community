@@ -15,8 +15,8 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="firststep.vue" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/page/firststep/firststep.vue">
+      <file leaf-file-name="fastnews.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/page/fastnews/fastnews.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="228">
               <caret line="12" column="8" lean-forward="false" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
@@ -36,7 +36,7 @@
         </entry>
       </file>
       <file leaf-file-name="ajaxtest.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/page/firststep/ajaxtest.vue">
+        <entry file="file://$PROJECT_DIR$/src/page/fastnews/ajaxtest.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="304">
               <caret line="16" column="48" lean-forward="false" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="48" />
@@ -137,16 +137,16 @@
         <option value="$PROJECT_DIR$/src/components/header.vue" />
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/data.json" />
-        <option value="$PROJECT_DIR$/src/page/firststep/ajax.vue" />
+        <option value="$PROJECT_DIR$/src/page/fastnews/ajax.vue" />
         <option value="$PROJECT_DIR$/src/router/index.js" />
         <option value="$PROJECT_DIR$/src/page/home/Hello.vue" />
         <option value="$PROJECT_DIR$/mock/db.json" />
         <option value="$PROJECT_DIR$/build/dev-server.js" />
         <option value="$PROJECT_DIR$/config/index.js" />
-        <option value="$PROJECT_DIR$/src/page/firststep/ajaxtest.vue" />
+        <option value="$PROJECT_DIR$/src/page/fastnews/ajaxtest.vue" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/src/page/firststep/firststep.vue" />
+        <option value="$PROJECT_DIR$/src/page/fastnews/fastnews.vue" />
       </list>
     </option>
   </component>
@@ -246,7 +246,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="firststep" />
+              <option name="myItemId" value="fastnews" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -432,7 +432,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/page/firststep/firststep.vue">
+    <entry file="file://$PROJECT_DIR$/src/page/fastnews/fastnews.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="7" column="8" lean-forward="false" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="52" />
@@ -514,7 +514,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/firststep/ajaxtest.vue">
+    <entry file="file://$PROJECT_DIR$/src/page/fastnews/ajaxtest.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
@@ -529,7 +529,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/firststep/firststep.vue">
+    <entry file="file://$PROJECT_DIR$/src/page/fastnews/fastnews.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
@@ -602,7 +602,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/firststep/firststep.vue">
+    <entry file="file://$PROJECT_DIR$/src/page/fastnews/fastnews.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="23" column="24" lean-forward="false" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
@@ -701,7 +701,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/firststep/firststep.vue">
+    <entry file="file://$PROJECT_DIR$/src/page/fastnews/fastnews.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="23" column="24" lean-forward="true" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
@@ -806,7 +806,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/firststep/ajaxtest.vue">
+    <entry file="file://$PROJECT_DIR$/src/page/fastnews/ajaxtest.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="16" column="48" lean-forward="false" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="48" />
@@ -841,7 +841,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/page/firststep/firststep.vue">
+    <entry file="file://$PROJECT_DIR$/src/page/fastnews/fastnews.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="12" column="8" lean-forward="false" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />

@@ -1,31 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HeaderTop from '@/components/header'
 import Hello from '@/page/home/Hello'
-import Firststep from '@/page/firststep/firststep'
+import Fastnews from '@/page/fastnews/fastnews'
 import Secondstep from '@/page/secondstep/secondstep'
 import Threestep from '@/page/threestep/threestep'
 import Fourstep from '@/page/fourstep/fourstep'
-import ajaxtest from '@/page/firststep/ajaxtest'
+import Quotes from '@/page/quotes/quotes'
+import ajaxtest from '@/page/fastnews/ajaxtest'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
-    {
-      path: '/header',
-      name: 'HeaderTop',
-      component: HeaderTop
-    },
     {
       path: '/',
       name: 'Hello',
       component: Hello,
       children: [
         {
-          path: '/firststep',
-          name: 'Firststep',
-          component: Firststep,
+          path: '/fastnews',
+          name: 'fastnews',
+          component: Fastnews,
           children: [
             {
               path: '/ajaxtest',
@@ -48,6 +44,11 @@ export default new Router({
           path: '/fourstep',
           name: 'Fourstep',
           component: Fourstep
+        },
+        {
+          path: '/quotes_all',
+          name: 'Quotes',
+          component: Quotes
         }
       ]
     }
