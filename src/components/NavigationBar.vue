@@ -1,4 +1,10 @@
 <template>
+  <!-- <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+  </el-tabs> -->
   <nav>
     <ul>
         <li v-for="item in headerlist" :key="item.path">
@@ -16,15 +22,16 @@
   import Router from 'vue-router'
   Vue.use(Router)
   export default {
-    name: 'HeaderTop',
+    name: 'navigationBar',
     data(){
       return {
+        activeName: 'first',
         headerlist: [{
             path: '/fastnews',
             title: '快讯'
           },
           {
-            path: '/secondstep',
+            path: '/news',
             title: '深度'
           },
           {
@@ -40,7 +47,10 @@
           }]
       }
     },
-    components:{
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
     }
   }
 </script>

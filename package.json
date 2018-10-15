@@ -1,8 +1,8 @@
 {
-  "name": "vue-cli-demo",
+  "name": "vue-shop",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "qianmeng <qianmeng@kingsoft.com>",
+  "author": "YzzHa <18390955482@163.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -11,6 +11,7 @@
     "mockdev": "npm run mock & npm run dev"
   },
   "dependencies": {
+    "element-ui": "^2.4.8",
     "vue": "^2.2.2",
     "vue-router": "^2.2.0"
   },

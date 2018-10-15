@@ -2,9 +2,9 @@
   <div class="wrap">
     <header>
       <div class="center_mainBox contariner">
-        <img :src="logo" alt="" srcset="">
-        <routernav></routernav>
-        <search></search>
+        <img src="@/assets/logo.png" alt="Logo" srcset="">
+        <NavigationBar></NavigationBar>
+        <Search></Search>
         <div class="user_login">
           <label>没有账号, 立即注册</label>
           <button class="login_btn">登录</button>
@@ -22,20 +22,12 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import HeaderTop from '@/components/header.vue'
-  import Search from '@/components/search.vue'
-  import logo from '@/assets/logo.png'
   export default {
-    name: 'Hello',
+    name: 'Home',
     data () {
       return {
-        logo
       }
     },
-    components: {
-      routernav : HeaderTop,
-      search : Search
-    }
   }
 </script>
 
