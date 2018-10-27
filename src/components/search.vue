@@ -27,7 +27,7 @@
     .header_search {
         position: relative;
         > .search_input {
-            padding: 5px 10px;
+            padding: 8px 15px;
             border-radius: 25px;
             border: none;
             outline: none;

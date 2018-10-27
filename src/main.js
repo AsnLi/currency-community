@@ -3,17 +3,23 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import VueResource from 'vue-resource'
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
-Vue.use(ElementUI);
-Vue.use(VueResource)
+Vue.use(ElementUI)
+
+import api from './api/index';
+Vue.use(api);
 
 import Components from './components';
 Object.keys(Components).forEach(compName => {
   Vue.component(compName, Components[compName]);
 });
+
+import store from './store';
+
+import bus from './router/eventBus';
+Vue.prototype.$Bus = bus
 
 import './styles/base.styl';
 Vue.config.productionTip = false
@@ -22,6 +28,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  template: '<App/>',
-  components: { App }
+  store,
+  components: { App },
+  template: '<App/>'
 })

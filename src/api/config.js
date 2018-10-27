@@ -1,0 +1,1 @@
+export const SERVER_BASE_URL = "https://wxtest.chancein.cn/api-h5/"
