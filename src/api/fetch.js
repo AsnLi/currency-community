@@ -8,25 +8,25 @@ export default function fetch (options) {
             timeout: 15000,
             headers: {
                 'Accept': '*/*',
-                'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Method': 'POST,GET'
-            }
+            },
         });
 
         // 添加请求拦截器
-        instance.interceptors.request.use(function (config) {
+        instance.interceptors.request.use((config) => {
             //check token exit
-            console.group("api start!")
+            console.group(options.url)
+            console.time()
             return config;
         }, function (error) {
             return Promise.reject(error);
         });
 
         // 添加响应拦截器
-        instance.interceptors.response.use(function (response) {
+        instance.interceptors.response.use((response) => {
             //check token doSomething
-            console.log("get resulted")
+            console.log(response)
             return response;
         }, function (error) {
             return Promise.reject(error);
@@ -38,7 +38,7 @@ export default function fetch (options) {
         }).catch((error) => {
             reject(error);
         }).finally(() => {
-            console.log("end:",options.url)
+            console.timeEnd()
             console.groupEnd()
         });
     })

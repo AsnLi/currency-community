@@ -1,7 +1,7 @@
 <template>
-  <el-header>
+  <el-header class="top-fixedNav" ref="topNav">
     <el-row>
-      <el-col :span="11">
+      <el-col :span="12">
         <img src="../assets/logo.png" alt="Logo" srcset="">
         <el-menu  :default-active="activeIndex" 
                   mode="horizontal" 
@@ -19,11 +19,11 @@
           </el-submenu>
         </el-menu>
       </el-col>
-      <el-col :span="12" :offset="1">
+      <el-col :span="11" :offset="1">
           <Search></Search>
           <div class="user_login">
               <span>没有账号? 立即注册</span>
-              <el-button round size="medium" @click="login()">登录</el-button>
+              <el-button round size="medium" @click="toggleLoginModal">登录</el-button>
           </div>
       </el-col>
   </el-row>
@@ -79,18 +79,12 @@ export default {
     handleSelect(tab, event) {
       console.log(tab, event);
     },
-    login (){
-      this.$store.dispatch("toggleLoginModal")
-    },
   },
   mounted () {
-    let obj = {"pageIndex":1,"pageSize":10,"filter":{"key":"万科A(000002.SZ)","byDate":"byDate","type":1,"code":"000002.SZ"}}
-    this.$api.sentimentNewsList(obj).then(res => {
-      console.log(res)
-    })
-    this.$Bus.$on('refmasterlist', function () {
-        console.log("from other comm")
-    });
+    const elm = this.$refs.topNav.$el
+    const holdBlock = document.createElement("header")
+    holdBlock.setAttribute("style", "height: 60px")
+    elm.parentElement.insertBefore(holdBlock, elm)
   },
   computed: {...mapState(['user'])}
 };
@@ -98,10 +92,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="stylus" scoped>
-   header {
+   .top-fixedNav {
       box-shadow: 0px 2px 2px rgba(26,26,26,0.1);
       width: 100%;
       padding: 0;
+      margin-bottom: 5px;
+      position fixed
+      top 0
+      background-color #fff;
+      z-index 999
       > div {
           width: 90%;
           min-width: 1170px;

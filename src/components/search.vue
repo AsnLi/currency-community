@@ -1,7 +1,7 @@
 <template>
     <div class="header_search">
         <input type="text" v-model="seachText" 
-               placeholder="搜索..." 
+               placeholder = "搜索.."
                class="search_input">
         <span class="search_sub" @click="test"></span>
     </div>
@@ -12,14 +12,22 @@
         name: 'search',
         data(){
             return {
-                seachText: ""
+                seachText: "",
+                placeholder: "搜索.."
             }
         },
         methods: {
             test(){
                 console.log(this.seachText)
             }
-        }
+        },
+        watch: {
+            seachText: v => {
+                console.log(v)
+            }
+        },
+        mounted() {
+        },
     }
 </script>
 

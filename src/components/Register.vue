@@ -1,22 +1,30 @@
 <template>
-    <el-dialog title="登录智子社区" :inline="true" :visible.sync="user.isShowLogin" :before-close="toggleLoginModal" width="35%">
+    <el-dialog title="注册" :inline="true" :visible.sync="user.isShowRegister" :before-close="finish" width="35%">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
             <el-form-item prop="phone">
-                <el-input v-model="ruleForm.phone" placeholder="手机号码" autocomplete="off"></el-input>
+                <el-input v-model="ruleForm.phone" placeholder="手机号码" autocomplete="off">
+                    <template slot="prepend">+86<i class="el-icon-arrow-down el-icon--right"></i></template>
+                </el-input>
             </el-form-item>
             <el-form-item prop="passwd">
-                <el-input type="password" v-model="ruleForm.passwd" placeholder="输入8/16位密码" autocomplete="off"></el-input>
+                <el-input v-model="ruleForm.passwd" placeholder="输入8~16位密码" autocomplete="off"></el-input>
             </el-form-item>
-            <el-form-item>
-                <el-checkbox label="2周内自动登录" name="type" v-model="ruleForm.isAutoLogin"></el-checkbox>
-                <span style="float: right;cursor:pointer;"  @click="toggleForgotModal">忘记密码</span>
+             <el-form-item prop="smsCode">
+                <el-input v-model="ruleForm.passwd" placeholder="输入4位短信验证码" autocomplete="off">
+                    <template slot="append">获取验证码</template>
+                </el-input>
             </el-form-item>
-            <el-button size="medium" type="primary" @click="submitForm('ruleForm')">登录</el-button>
+             <el-form-item prop="inviteCode">
+                <el-input v-model="ruleForm.passwd" placeholder="输入邀请码" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-button size="medium" type="primary" @click="submitForm('ruleForm')">注册</el-button>
         </el-form>
+
         <div slot="footer" class="dialog-footer">
-             <p class="register" @click="toggleRegisterModal">立即注册
+            <p class="login" @click="toggleLoginModal">已有账号, 立即登录
                 <span class="help"><i class="el-icon-question" style="color: #bdbfc1"></i> 帮助</span>
             </p>
+            <p class="service">登录 / 注册代表您已阅读并同意 <a href="#">智子社区服务协议</a></p>
         </div>
     </el-dialog>
 </template>
@@ -30,7 +38,8 @@
                 ruleForm: {
                     phone: '',
                     passwd: '',
-                    isAutoLogin: false
+                    smsCode: '',
+                    inviteCode: ''
                 },
                 rules: {
                     phone: [
@@ -40,19 +49,27 @@
                     passwd: [
                         { required: true, message: '请输入密码', trigger: 'blur' }
                     ],
+                    smsCode: [
+                        { required: true, message: '请输入验证码', trigger: 'blur' }
+                    ],
+                    inviteCode: [
+                        { required: true, message: '请输入邀请码', trigger: 'blur' }
+                    ]
                 }
             }
         },
         methods: {
             ...mapActions([
-                'toggleLoginModal',
                 'toggleRegisterModal',
-                'toggleForgotModal'
+                'toggleLoginModal'
             ]),
+            finish (){
+                this.$store.dispatch("toggleRegisterModal")
+            },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.toggleLoginModal()
+                        this.finish()
                         console.log(this.ruleForm)
                     } else {
                         console.log('error submit!!');
@@ -71,17 +88,23 @@
     }
     .dialog-footer {
         position relative
-        > .register {  
+        p {
+            text-align center
+            line-height 1.5
+        }
+        > .login {  
             cursor pointer
             overflow hidden
             vertical-align middle
-            text-align center
             > .help {
                 display inline-block
                 color: #409EFF;
                 font-size: 14px;
                 float right
             }
+        }
+        > .service {  
+           font-size 14px  
         }
     }
 </style>
