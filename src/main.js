@@ -21,7 +21,7 @@ import store from './store';
 import bus from './router/eventBus';
 Vue.prototype.$Bus = bus
 
-import './styles/base.styl';
+import './styles/all.styl';
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
