@@ -2,9 +2,9 @@
   <div class="wrap">
     <NavigationBar></NavigationBar>
     <el-main>
-      <!-- <keep-alive> -->
+      <keep-alive>
         <router-view></router-view>
-      <!-- </keep-alive> -->
+      </keep-alive>
     </el-main>
     <Login></Login>
     <Register></Register>
@@ -29,5 +29,6 @@
   .el-main {
     width: 100%;
     background-color: #f5f6f7;
+    padding 0;
   }
 </style>

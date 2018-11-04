@@ -52,11 +52,11 @@ export default {
           title: "深度"
         },
         {
-          path: "/threestep",
+          path: "/incident",
           title: "事件"
         },
         {
-          path: "/fourstep",
+          path: "/circle",
           title: "圈子"
         },
         {

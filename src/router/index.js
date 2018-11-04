@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/page/home/Home'
 import Fastnews from '@/page/fastnews/fastnews'
-import News from './news'
-import Threestep from '@/page/threestep/threestep'
-import Fourstep from '@/page/fourstep/fourstep'
+import News from '@/page/news/News'
+import Incident from '@/page/incident/incident'
+import Circle from '@/page/circle/circle'
 
 import Quotes from '@/page/quotes/quotes'
 
@@ -30,20 +30,20 @@ const routes = [{
           }
         ]
       },
-      // {
-      //   path: '/news',
-      //   name: 'News',
-      //   component: News
-      // },
       {
-        path: '/threestep',
-        name: 'Threestep',
-        component: Threestep
+        path: '/news',
+        name: 'News',
+        component: News
       },
       {
-        path: '/fourstep',
-        name: 'Fourstep',
-        component: Fourstep
+        path: '/incident',
+        name: 'Incident',
+        component: Incident
+      },
+      {
+        path: '/circle',
+        name: 'Circle',
+        component: Circle
       },
       {
         path: '/quotes_all',

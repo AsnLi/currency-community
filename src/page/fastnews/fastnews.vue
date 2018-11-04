@@ -1,5 +1,5 @@
 <template>
-    <div class="center-box">
+    <div class="container">
       <el-row class="token-indexs box-shadow">
         <el-col :span="4" v-for="index in 6" :key="index">
           <p class="index-name">
@@ -15,24 +15,23 @@
             <div class="flex-between">
               <div class="label-group">
                   <span class="label-hot" style="font-size: 14px;">热门标签: &nbsp;</span>
-                  <el-button size="small" v-for="(item, index) in label.hotLabels" :key="index" 
-                  :type="index == label.curLabel ? 'primary' : ''" round @click="switchLabel(index, item)">{{item}}</el-button>
+                  <el-button size="small" round v-for="(item, index) in label.hotLabels" :key="item.label" 
+                  :type="index == label.curLabel ? 'primary' : ''" @click="switchLabel(index, item)">{{item.label}}</el-button>
               </div>
               <Search></Search>
             </div>
             <div class="now-time flexCloseTopNav" v-show="isShowFlexTime">{{ nowDate }}</div>
             <div class="now-time " ref="time">{{ nowDate }}</div>
 
-            <p style="text-align: center" v-if="loading">
-                <i class="el-icon-loading"></i>
-            </p>
-
             <ul class="content-list">
                 <li v-for="news in newsList" :key="news.id">
                   <span class="news-time">{{ some(news.infopubldate) }}</span>
-                  <h3>{{ news.newsTitle }}</h3>
-                  <p class="news-content">{{ news.newsAbstract }}</p>
-                  <p class="news-share">
+                  <h3 v-html="news.newsTitle"></h3>
+                  <p class="news-content" v-html="news.newsAbstract"></p>
+                  <div class="news-footer flex-between">
+                    <div class="tag-group">
+                      <span v-for="tag in news.tagMap" :key="tag.name">{{ tag.name }}</span>
+                    </div>
                     <el-dropdown placement="top">
                       <span class="el-dropdown-link" @mouseover="shareNews(news)">
                         <i class="el-icon-share"></i> 分享
@@ -48,10 +47,10 @@
                         </el-dropdown-item>
                       </el-dropdown-menu>
                     </el-dropdown>
-                  </p>
+                  </div>
                 </li>
             </ul>
-            <el-button size="small" style="width: 100%" type="info" @click="showMore">点击加载更多...</el-button>
+            <el-button size="small" style="width: 100%" type="info" @click="showMore" :disabled="isLoading">点击加载更多...</el-button>
         </el-col>
         <el-col :span="8" class="fastNews-sidebar">
             <div class="banner">
@@ -94,12 +93,33 @@
       return {
         indexs: [],
         newsList: [],
+        isLoading: true,
         some: Function,
         isShowFlexTime: false,
-        loading: true,
+        curPageIndex: 1,
         label: {
             curLabel: 0,
-            hotLabels: ["全部", "ETC","监管","ETH","交易所"]
+            hotLabels: [{
+                "label": "全部",
+              },{
+                "code": "000002.SZ",
+                "label": "万科",
+                "type": 1
+              }, {
+                "code": "002261.SZ",
+                "label": "拓维信息",
+                "type": 1
+              }, {
+                "code": 131,
+                "plateId": 131,
+                "label": "5G概念",
+                "type": 3
+              }, {
+                "code": "000001.SZ",
+                "label": "平安银行",
+                "type": 1
+              }
+            ]
         }
       }
     },
@@ -108,11 +128,35 @@
         console.log(oCurNews)
       },
       switchLabel(nIndex, sLabel){
+        this.curPageIndex = 1
         this.label.curLabel = nIndex
-        console.log(sLabel)
+        this.getNewsList(sLabel)
+      },
+      markKeyWord(sWord){
+        if(sWord == "全部") return;
+        this.newsList.forEach( v => {
+          const {newsTitle, newsAbstract} = v
+          v.newsTitle    = newsTitle.split(sWord).join(`<span style="color:#3393fc;">${ sWord }</span>`);
+          v.newsAbstract = newsAbstract.split(sWord).join(`<span style="color:#3393fc;">${ sWord }</span>`);
+			  })
       },
       showMore(){
-        console.log("more")
+        const {curLabel, hotLabels} = this.label
+        this.curPageIndex += 1
+        this.isLoading = true
+        this.getNewsList(hotLabels[curLabel], true)
+      },
+      getNewsList(oParm = {}, bIsMore = false){
+        let loadingInstance = this.$loading({ target: ".content-list", text: "拼命加载中..." });
+        let token = {"pageIndex": this.curPageIndex, "pageSize": 10,"filter": Object.assign({"byDate":"byDate"}, oParm)}
+        this.$api.sentimentNewsList(token).then(({ Data: { rows } }) => {
+          this.newsList = bIsMore ? this.newsList.concat(rows) :  rows
+          this.markKeyWord(oParm.label)
+          this.$nextTick(() => { 
+            loadingInstance.close();
+            this.isLoading = false
+          });
+        })
       },
       someFn(str){
         return str.substring(str.indexOf(" ") + 1, str.lastIndexOf(":"))
@@ -125,17 +169,10 @@
     },
     mounted() {
       this.some = this.someFn
-
       this.$Bus.$on("flexTime", (toggle)=>{
         this.isShowFlexTime = toggle
       })
-      // this.$Bus.$emit("showLoading")
-      let obj = {"pageIndex":1,"pageSize":10,"filter":{"key":"万科A(000002.SZ)","byDate":"byDate","type":1,"code":"000002.SZ"}}
-      this.$api.sentimentNewsList(obj).then(({ Data: { rows } }) => {
-        this.newsList = rows
-        this.loading = false
-        // this.$Bus.$emit("hiddenLoading")
-      })
+      this.getNewsList()
     },
   }
 </script>
@@ -144,11 +181,6 @@
 <style lang="stylus" scoped>
   baseFs = 16px
   makerColor = #3393fc
-  .el-icon-loading {
-    color #3393fc
-    font-size 3em
-    margin 0 auto
-  }
   .flexCloseTopNav {
     position fixed
     top 60px
@@ -159,7 +191,7 @@
     margin 0 !important
     z-index 999
   }
-  .center-box {
+  .container {
     width: 90%;
     min-width: 1170px;
     margin-left: auto;
@@ -198,6 +230,7 @@
             padding-left: 15px;
             margin-left: 15px;
             margin-bottom: 25px;
+            min-height 300px
             border-left: 2px solid #dae0eb;
             > li {
               margin-bottom: 20px;
@@ -225,9 +258,16 @@
                 line-height 1.6
                 color #4f5053
               }
-              > .news-share {
-                text-align: right
+              > .news-footer {
                 margin-top 10px
+                > .tag-group {
+                  font-size baseFs - 2
+                  color #99999c
+                  > span {
+                    margin-right 15px
+                    cursor pointer
+                  }
+                }
                 .el-dropdown-link {
                   cursor pointer
                   margin-right 20px
@@ -302,8 +342,6 @@
     }
   }
   .el-dropdown-menu__item {
-    display flex
-    flex-direction row
     .shareQrcode {
       width 100px
       height 100px

@@ -5,7 +5,7 @@
                 <el-input v-model="ruleForm.phone" placeholder="手机号码" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item prop="passwd">
-                <el-input type="password" v-model="ruleForm.passwd" placeholder="输入8/16位密码" autocomplete="off"></el-input>
+                <el-input type="password" v-model="ruleForm.passwd" placeholder="输入8~16位密码" autocomplete="off"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-checkbox label="2周内自动登录" name="type" v-model="ruleForm.isAutoLogin"></el-checkbox>
@@ -35,7 +35,7 @@
                 rules: {
                     phone: [
                         { required: true, message: '请输入手机号码', trigger: 'blur' },
-                        { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                        { min: 13, message: '请输入正确的手机号码', trigger: 'blur' }
                     ],
                     passwd: [
                         { required: true, message: '请输入密码', trigger: 'blur' }
