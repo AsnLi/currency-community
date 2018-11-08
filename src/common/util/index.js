@@ -25,6 +25,11 @@ const dateFormat = (format) => {
     return format;
 }
 
+const sliceDate = (sDateStr) => {
+    return sDateStr.substring(sDateStr.indexOf(" ") + 1, sDateStr.lastIndexOf(":"))
+}
+
 export {
     dateFormat,
+    sliceDate
 }

@@ -1,62 +1,48 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/page/home/Home'
-import Fastnews from '@/page/fastnews/fastnews'
-import News from '@/page/news/News'
-import Incident from '@/page/incident/incident'
-import Circle from '@/page/circle/circle'
 
-import Quotes from '@/page/quotes/quotes'
+import HomeRoute from './home'
+import NewsRoute from './news';
+import IncidentRoute from './incident'
+import CircleRoute from './circle'
+import QuotesRoute from './quotes'
 
-import ajaxtest from '@/page/fastnews/ajaxtest'
-
-
+import store from '@/store';
 Vue.use(Router)
 
 const routes = [{
-    path: '/',
-    name: 'Home',
-    component: Home,
-    children: [
-      {
-        path: '/fastnews',
-        name: 'Fastnews',
-        component: Fastnews,
-        children: [
-          {
-            path: '/ajaxtest',
-            name: 'ajaxtest',
-            component: ajaxtest
-          }
-        ]
-      },
-      {
-        path: '/news',
-        name: 'News',
-        component: News
-      },
-      {
-        path: '/incident',
-        name: 'Incident',
-        component: Incident
-      },
-      {
-        path: '/circle',
-        name: 'Circle',
-        component: Circle
-      },
-      {
-        path: '/quotes_all',
-        name: 'Quotes',
-        component: Quotes
-      }
-    ]
-  }]
-
+  path: '/',
+  redirect: {
+    name: 'home'
+  }
+},
+  ...HomeRoute.concat(NewsRoute, IncidentRoute, CircleRoute, QuotesRoute)
+];
 
 const router = new Router({
   mode: 'history',
-  routes
+  routes,
+});
+
+router.beforeEach((to, _, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!auth.loggedIn()) {
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
+router.afterEach((to, _) => {
+  if (to.matched.some(record => record.meta.activeItem)) {
+    store.commit('updateNavigationBar', to.meta.activeItem);
+  }
 })
 
 export default router

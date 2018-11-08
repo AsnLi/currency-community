@@ -14,8 +14,8 @@
           </el-menu-item>
           <el-submenu index="/quotes_all">
             <template slot="title">工具</template>
-            <el-menu-item index="5-1">选项1</el-menu-item>
-            <el-menu-item index="5-2">选项2</el-menu-item>
+            <el-menu-item index="5-1">知识图谱查询</el-menu-item>
+            <el-menu-item index="5-2">白皮书查重</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-col>
@@ -31,20 +31,15 @@
 </template>
 
 <script>
-import Vue from "vue";
-import Router from "vue-router";
-Vue.use(Router);
-
 import { mapState, mapActions} from 'vuex';
-
 export default {
   name: "navigationBar",
   data() {
     return {
-      activeIndex: "/fastnews",
+      activeIndex: location.pathname,
       navlist: [
         {
-          path: "/fastnews",
+          path: "/home",
           title: "快讯"
         },
         {
@@ -60,7 +55,7 @@ export default {
           title: "圈子"
         },
         {
-          path: "/quotes_all",
+          path: "/quotes",
           title: "行情",
         },
         {
@@ -69,24 +64,32 @@ export default {
           submenu: ["选项1", "选项2"]
         }
       ],
-      info: {}
     };
   },
   methods: {
      ...mapActions([
-      'toggleLoginModal'
+      'toggleLoginModal',
     ]),
     handleSelect(tab, event) {
       console.log(tab, event);
     },
+    insertHoldBlock(){
+      const elm = this.$refs.topNav.$el
+      const holdBlock = document.createElement("header")
+      holdBlock.setAttribute("style", "height: 60px")
+      holdBlock.setAttribute("id", "holdBlock")
+      elm.parentElement.insertBefore(holdBlock, elm)
+    }
   },
   mounted () {
-    const elm = this.$refs.topNav.$el
-    const holdBlock = document.createElement("header")
-    holdBlock.setAttribute("style", "height: 60px")
-    elm.parentElement.insertBefore(holdBlock, elm)
+    setTimeout(()=> {
+      if(this.app.activeItem){
+        this.activeIndex = this.app.activeItem
+      }
+    }, 300)
+    if(!document.getElementById("holdBlock")) this.insertHoldBlock()
   },
-  computed: {...mapState(['user'])}
+  computed: {...mapState(['user', 'app'])}
 };
 </script>
 

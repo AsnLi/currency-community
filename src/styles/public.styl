@@ -18,8 +18,19 @@
 .user-info {
   display flex
   flex-direction row
-  > img {
+  > .user-avater {
     border-radius 50%
     margin-right 10px
+  }
+  > .user-message {
+    position relative
+    :first-child{
+      font-weight bold
+    }
+    > .more {
+      font-size 12px
+      position absolute
+      bottom 0
+    }
   }
 }

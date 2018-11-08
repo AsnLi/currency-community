@@ -1,9 +1,19 @@
 const News = () => import (/* webpackChunkName: "news" */ '@/page/news/News');
+const NewsDetail = () => import (/* webpackChunkName: "news" */ '@/page/news/newsDetail');
 
 const news = {
     path: '/news',
-    name: 'News',
+    name: 'news',
     component: News,
 };
 
-export default news
+const newsDetail = {
+    path: '/newsDetail',
+    name: 'newsDetail',
+    component: NewsDetail,
+    meta: {
+        activeItem: 'news'
+    }
+};
+
+export default [news, newsDetail]
