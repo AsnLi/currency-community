@@ -20,7 +20,7 @@
 
 <script>
     export default {
-        name: 'circlelist',
+        name: 'CircleList',
         data(){
             return {
 

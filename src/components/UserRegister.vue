@@ -11,11 +11,18 @@
             </el-form-item>
              <el-form-item prop="smsCode">
                 <el-input v-model="ruleForm.passwd" placeholder="输入4位短信验证码" autocomplete="off">
-                    <template slot="append">获取验证码</template>
+                    <template slot="append" >
+                        <el-button type="primary" round size="small" style="width: 103px" @click="getCode" :disabled='!!countDown'>
+                            {{ countTip }}
+                        </el-button>
+                    </template>
                 </el-input>
             </el-form-item>
              <el-form-item prop="inviteCode">
                 <el-input v-model="ruleForm.passwd" placeholder="输入邀请码" autocomplete="off"></el-input>
+            </el-form-item>
+             <el-form-item>
+                   <TheSlipCheck></TheSlipCheck>
             </el-form-item>
             <el-button size="medium" type="primary" @click="submitForm('ruleForm')">注册</el-button>
         </el-form>
@@ -32,7 +39,7 @@
 <script>
     import { mapState, mapActions } from 'vuex'
     export default {
-        name: 'Login',
+        name: 'user-register',
         data(){
             return {
                 ruleForm: {
@@ -41,6 +48,7 @@
                     smsCode: '',
                     inviteCode: ''
                 },
+                countDown: null,
                 rules: {
                     phone: [
                         { required: true, message: '请输入手机号码', trigger: 'blur' },
@@ -66,6 +74,15 @@
             finish (){
                 this.$store.dispatch("toggleRegisterModal")
             },
+            getCode(){
+                let { countDown } = this
+                if(countDown === null) this.countDown = 60;
+
+                if(countDown == 55) return this.countDown = null;
+
+                this.countDown -= 1
+                setTimeout(this.getCode, 1000)
+            },
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
@@ -78,7 +95,13 @@
                 });
             },
         },
-        computed: {...mapState(['user'])}
+        computed: {
+            ...mapState(['user']),
+            countTip(){
+                let { countDown } = this
+                return  countDown !== null ? countDown + '秒后重发' : '获取验证码' 
+            }
+        }
     }
 </script>
 

@@ -99,14 +99,26 @@
       },
       getNewsList(oParm = {}, bIsMore = false){
         let loadingInstance = this.$loading({ target: ".tree-list", text: "拼命加载中..." });
+
         let token = {"pageIndex": this.curPageIndex, "pageSize": 10,"filter": Object.assign({"byDate":"byDate"}, oParm)}
         this.$api.sentimentNewsList(token).then(({ Data: { rows } }) => {
           this.newsList = bIsMore ? this.newsList.concat(rows) :  rows
           this.markKeyWord(oParm.label)
+
           this.$nextTick(() => { 
             loadingInstance.close();
             this.isLoading = false
           });
+
+        }).catch(e => {
+           this.$nextTick(() => { 
+            loadingInstance.close();
+            this.isLoading = false
+          });
+          this.$Bus.$emit('dataError', {msg: e.message, callBack: () => {
+            console.log("try again!")
+            // this.getNewsList(oParm, bIsMore)
+          }})
         })
       },
     },

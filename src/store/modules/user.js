@@ -2,12 +2,16 @@
 const state = {
     isShowLogin: false,
     isShowRegister: false,
-    isShowForgot: false
+    isShowForgot: false,
+    isShowReport: false
 }
 
 const actions = {
     toggleLoginModal ({ commit }) {
         commit("toggleLoginModal")
+    },
+    toggleReportModal ({ commit }) {
+        commit("toggleReportModal")
     },
     toggleRegisterModal ({ commit }) {
         commit("toggleRegisterModal")
@@ -23,6 +27,9 @@ const mutations = {
             state.isShowRegister = false;
 
         state.isShowLogin = !state.isShowLogin
+    },
+    toggleReportModal (state) {
+        state.isShowReport = !state.isShowReport
     },
     toggleRegisterModal (state) {
         if(state.isShowLogin) 

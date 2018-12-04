@@ -24,7 +24,7 @@
 <script>
     import { mapState, mapActions } from 'vuex'
     export default {
-        name: 'Login',
+        name: 'user-login',
         data(){
             return {
                 ruleForm: {

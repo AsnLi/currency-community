@@ -33,7 +33,7 @@
 <script>
 import { mapState, mapActions} from 'vuex';
 export default {
-  name: "navigationBar",
+  name: "app-navigationBar",
   data() {
     return {
       activeIndex: location.pathname,
@@ -71,7 +71,6 @@ export default {
       'toggleLoginModal',
     ]),
     handleSelect(tab, event) {
-      console.log(tab, event);
     },
     insertHoldBlock(){
       const elm = this.$refs.topNav.$el

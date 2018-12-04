@@ -13,7 +13,7 @@ Vue.use(api);
 
 import Components from './components';
 Object.keys(Components).forEach(compName => {
-  Vue.component(compName, Components[compName]);
+  Vue.component(Components[compName].name, Components[compName]);
 });
 
 import store from './store';

@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    <NavigationBar></NavigationBar>
+    <app-navigationBar></app-navigationBar>
     <el-main>
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
     </el-main>
-    <Login></Login>
-    <Register></Register>
-    <ForgotPasswd></ForgotPasswd>
-    <BackTop></BackTop>
-    <Copyright></Copyright>
+    <user-login></user-login>
+    <user-register></user-register>
+    <user-forgotPasswd></user-forgotPasswd>
+    <user-report></user-report>
+    <app-copyright></app-copyright>
+    <the-backTop></the-BackTop>
   </div>
 </template>
 

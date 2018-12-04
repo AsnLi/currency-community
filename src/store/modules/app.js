@@ -12,14 +12,14 @@ const actions = {
 const mutations = {
     updateNavigationBar (state, sActiveItem) {
         state.activeItem = "/" + sActiveItem
+        console.log(state.activeItem)
     },
 }
 
 const getters = {
-    // maxNum: (state) => {
-    //     return state.nums.filter( v => v.num > 0 )
-    // }
+    activeItem: (state) => state.activeItem
 }
+
 export default {
     state,
     getters,

@@ -24,7 +24,7 @@
 
 <script>
     export default {
-        name: 'copyright',
+        name: 'app-copyright',
         data(){
             return {
             }

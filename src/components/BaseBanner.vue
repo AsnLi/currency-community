@@ -11,7 +11,7 @@
 
 <script>
     export default {
-        name: 'baseBanner',
+        name: 'BaseBanner',
         data(){
             return {
             }

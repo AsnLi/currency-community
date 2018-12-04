@@ -1,5 +1,10 @@
 <template>
     <ul :class="['tree-list', { 'small': isParentCard }]">
+
+        <p v-show="errorData.msg" style="text-align: center;">数据显示出错:({{errorData.msg}})
+            <span @click="errorData.callBack()" style="color: blue; cursor: pointer">点击刷新</span>
+        </p>
+
         <li v-for="news in newsList" :key="news.id">
             <span class="news-time">{{ isParentCard ? news.infopubldate : sliceDate(news.infopubldate) }}</span>
             <h3 v-html="news.newsTitle" class="news-title"></h3>
@@ -32,10 +37,10 @@
 <script>
     import { sliceDate } from "@/common/util/index"
     export default {
-        name: 'treelist',
+        name: 'TreeList',
         data(){
             return {
-                
+                errorData: {}
             }
         },
         props: {
@@ -53,8 +58,13 @@
             },
             sliceDate(s){
                 return sliceDate(s)
-            }           
-        }
+            }       
+        },
+        mounted() {
+            this.$Bus.$on("dataError", errorData => {
+                this.errorData = errorData
+            })
+        },
     }
 </script>
 
@@ -71,6 +81,7 @@
         }
         &::-webkit-scrollbar-thumb {
             background-color: #8b8b8b;
+
             border-radius: 10px;
         }
         &::-webkit-scrollbar-track {

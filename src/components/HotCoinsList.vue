@@ -11,7 +11,7 @@
 
 <script>
     export default {
-        name: 'hotcoinslist',
+        name: 'Hotcoinslist',
         data(){
             return {
 

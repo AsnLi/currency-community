@@ -16,7 +16,7 @@
 
 <script>
     export default {
-        name: 'basecard',
+        name: 'BaseCard',
         data(){
             return {
                 activeIndex: ''
@@ -29,6 +29,9 @@
             titleArray: {
                 type: Array
             },
+            tabSelectHandle: {
+                type: Function
+            },
             more: {
                 type: String,
                 value: ''
@@ -40,6 +43,7 @@
         methods: {
             tabSelect(item){
                 this.activeIndex = item
+                this.tabSelectHandle(item)
             }     
         },
         mounted() {

@@ -28,17 +28,17 @@
                  </el-row>
                  <el-row :gutter="10" class="incident-vote">
                     <el-col :span="12">
-                      <el-progress :percentage="80" color="#f70" :show-text="false"></el-progress>
+                      <el-progress :percentage="countPercent('good')" color="#f70" :show-text="false"></el-progress>
                     </el-col>
                     <el-col :span="12">
-                      <el-progress :percentage="80" color="#3393fc" :show-text="false"></el-progress>
+                      <el-progress :percentage="countPercent('bad')" color="#3393fc" :show-text="false"></el-progress>
                     </el-col>
                  </el-row>
                  <div class="incident-discuss flex-between">
-                    <span style="line-height: 2"><i class="el-icon-all-weibiaoti-"></i> 44</span>
+                    <span style="line-height: 2"><i class="el-icon-all-weibiaoti-"></i> {{Incidentvote.count}}</span>
                     <div>
-                      <span><i class="el-icon-all-zan"></i> 利好</span>
-                      <span style="margin-left: 10px"><i class="el-icon-all-chaping"></i> 利空</span>
+                      <span @click="voteHandle(true)"><i class="el-icon-all-zan"></i> 利好</span>
+                      <span @click="voteHandle(false)" style="margin-left: 10px"><i class="el-icon-all-chaping"></i> 利空</span>
                     </div>
                  </div>
               </li>
@@ -66,6 +66,11 @@
     name: 'incident',
     data () {
       return {
+        Incidentvote: {
+          good: 0,
+          bad: 0,
+          count: 0
+        },
         activeIndex: '1',
         options: [{
           value: 'hot',
@@ -78,8 +83,21 @@
       }
     },
     methods: {
-      handleSelect(){
-
+      voteHandle(isGood){
+        if (isGood) {
+          ++this.Incidentvote.good
+        } else {
+          ++this.Incidentvote.bad
+        }
+        this.Incidentvote.count = this.Incidentvote.good + this.Incidentvote.bad 
+      }
+    },
+    computed: {
+      countPercent(sIndex){
+        const parent = this.Incidentvote
+        return sIndex => {
+           return (!parent.good && !parent.bad) ? 100 : parent[sIndex] / parent.count * 100 
+        }
       }
     }
   }

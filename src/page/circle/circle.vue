@@ -39,153 +39,37 @@
         </el-col>
         <el-col :span="8" class="sidebar">
           <BaseCard title="达人榜单" more="换一换" isFirst>
-              <ul>
-                <li class="flex-between" style="align-items:center; margin-bottom: 20px" v-for="item in 3" :key="item">
-                  <div class="user-info">
-                    <img src="../../assets/firend.png" alt="" width="48px" height="48px" class="user-avater">
-                    <div class="user-message">
-                        <p class="font-bold">圈友-01</p>
-                        <p class="more">6个小时前</p>
-                    </div>
-                  </div>
-                  <el-button icon="el-icon-plus font-bold" size="small"></el-button>
-                </li>
-              </ul>
-        </BaseCard>
-         <BaseCard title="大家都在谈">
-            <div ref="wordCloud" class="word-cloud-body"></div>
-         </BaseCard>
+                <list-HotTalents></list-HotTalents>
+          </BaseCard>
+          <BaseCard title="大家都在谈">
+              <list-wordcloud></list-wordcloud>
+          </BaseCard>
         </el-col>
       </el-row>
     </div>
 </template>
 
 <script>
-  import echarts from 'echarts';
-  import wordCloud from 'echarts-wordcloud';
+  import AllTalkword from '@/components/talks/AllTalkword'
+  import HotTalent from '@/components/HotTalent'
   export default {
-    name: 'fourstep',
-    components: [ wordCloud ],
+    name: 'circle',
+    components:{
+        "list-wordcloud": AllTalkword,
+        "list-HotTalents": HotTalent
+    },
     data () {
       return {
          activeIndex: "推荐",
-         navlist: ["推荐", "热榜","干货","糖果"],
-         wordsData: [],
-        wordCloud: null,
-        chartOptions: {
-          tooltip: {
-            show: true,
-            formatter: (params) => {
-              return params.data.name /* + '<br/>' + '热度：' + params.data.hot*/;
-            }
-          },
-          series: [{
-            type: 'wordCloud', //类型为字符云
-            size: ['100%', '100%'],
-            sizeRange: [8, 30],
-            rotationRange: [0, 0], //旋转范围
-            textStyle: {
-              normal: {
-                fontFamily: 'sans-serif',
-                color: function () {
-                  return 'rgb(' + [Math.round(Math.random() * 160),
-                      Math.round(Math.random() * 160),
-                      Math.round(Math.random() * 160)
-                    ]
-                    .join(',') + ')';
-                }
-              },
-              emphasis: {
-                shadowBlur: 5, //阴影距离
-                shadowColor: '#333' //阴影颜色
-              }
-            },
-            data: [{
-            name: 'Sam S Club',
-            value: 10000,
-            textStyle: {
-                normal: {
-                    color: 'black'
-                },
-                emphasis: {
-                    color: 'red'
-                }
-            }
-            }, {
-                name: 'Macys',
-                value: 6181
-            }, {
-                name: 'Amy Schumer',
-                value: 4386
-            }, {
-                name: 'Jurassic World',
-                value: 4055
-            }, {
-                name: 'Charter Communications',
-                value: 2467
-            }, {
-                name: 'Chick Fil A',
-                value: 2244
-            }, {
-                name: 'Planet Fitness',
-                value: 1898
-            }, {
-                name: 'Pitch Perfect',
-                value: 1484
-            }, {
-                name: 'Express',
-                value: 1112
-            }, {
-                name: 'Home',
-                value: 965
-            }, {
-                name: 'Johnny Depp',
-                value: 847
-            }, {
-                name: 'Lena Dunham',
-                value: 582
-            }, {
-                name: 'Lewis Hamilton',
-                value: 555
-            }, {
-                name: 'KXAN',
-                value: 550
-            }, {
-                name: 'Mary Ellen Mark',
-                value: 462
-            }, {
-                name: 'Farrah Abraham',
-                value: 366
-            }, {
-                name: 'Rita Ora',
-                value: 360
-            }, {
-                name: 'Serena Williams',
-                value: 282
-            }, {
-                name: 'NCAA baseball tournament',
-                value: 273
-            }, {
-                name: 'Point Break',
-                value: 265
-            }],
-          }]
-        }
+         navlist: ["推荐", "热榜","干货","糖果"]
       }
     },
     methods: {
       handleSelect(tab, event) {
         console.log(tab, event);
       },
-      initWordCloud() {
-        this.wordCloud = echarts.init(this.$refs.wordCloud);
-        // 配置
-        this.wordCloud.setOption(this.chartOptions);
-      }
     },
     mounted() {
-      console.log(echarts)
-      this.initWordCloud();
     },
   }
 </script>
@@ -220,11 +104,6 @@
 .test {
   min-height 128px
   min-width 205px
-}
-
-.word-cloud-body {
-  width 100%
-  height 200px
 }
 
 </style>

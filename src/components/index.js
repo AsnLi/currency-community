@@ -1,27 +1,35 @@
-import NavigationBar from './NavigationBar'
+import AppNavigationBar from './AppNavigationBar'
+import AppCopyright from './AppCopyright'
+
+import UserLogin from './UserLogin'
+import UserRegister from './UserRegister'
+import UserForgotPasswd from './UserForgotPasswd'
+import UserReport from './UserReport'
+
 import Search from './Search'
-import Copyright from './Copyright'
-import Login from './Login'
-import Register from './Register'
-import ForgotPasswd from './ForgotPasswd'
-import BackTop from './BackTop'
 import TreeList from './TreeList'
 import CircleList from './CircleList'
 import HotCoinsList from './HotCoinsList'
+
 import BaseCard from './BaseCard'
 import BaseBanner from './BaseBanner'
 
+import TheBackTop from './TheBackTop'
+import TheSlipCheck from './TheSlipCheck'
+
 export default {
-    NavigationBar,
+    AppNavigationBar,
+    AppCopyright,
+    UserLogin,
+    UserRegister,
+    UserForgotPasswd,
+    UserReport,
     Search,
-    Copyright,
-    Login,
-    Register,
-    ForgotPasswd,
-    BackTop,
     TreeList,
     CircleList,
     HotCoinsList,
     BaseCard,
-    BaseBanner
+    BaseBanner,
+    TheBackTop,
+    TheSlipCheck,
 }

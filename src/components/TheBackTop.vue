@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: 'backTop',
+        name: 'the-backTop',
         data(){
             return {
                 isShowBack: false,

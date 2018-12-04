@@ -23,7 +23,7 @@
 <script>
     import { mapState, mapActions } from 'vuex'
     export default {
-        name: 'Login',
+        name: 'user-forgotPasswd',
         data(){
             return {
                 labelPosition: 'right',
