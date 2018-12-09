@@ -4,7 +4,7 @@
         <el-col :span="4" v-for="index in 6" :key="index">
           <p class="index-name">
             <img src="../../assets/BTC.png" alt="" srcset="">
-            <span>&nbsp; BTC 比特币</span>
+            <span @click="goDetailView">&nbsp; BTC 比特币</span>
           </p>
           <p class="index-price">￥444489</p>
           <p class="index-drop">-94.32(-0.21%)</p>
@@ -75,6 +75,9 @@
       }
     },
     methods: {
+      goDetailView(){
+        this.$router.push({path: "digiccy"})
+      },
       shareNews(oCurNews){
         console.log(oCurNews)
       },
@@ -166,6 +169,10 @@
         align-items: center;
         color: black !important;
         font-size: baseFs - 1;
+        span:hover{
+          cursor pointer
+          text-decoration underline
+        }
       }
       .index-price {
         font-weight: bold;

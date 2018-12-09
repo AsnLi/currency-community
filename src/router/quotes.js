@@ -1,4 +1,5 @@
 const Quotes = () => import (/* webpackChunkName: "quotes" */ '@/page/quotes/Quotes');
+const Digiccy = () => import (/* webpackChunkName: "quotes" */ '@/page/quotes/Digiccy');
 
 const quotesRoute = {
     path: '/quotes',
@@ -6,4 +7,13 @@ const quotesRoute = {
     component: Quotes,
 };
 
-export default [ quotesRoute ]
+const DigiccyRoute = {
+    path: '/digiccy',
+    name: 'digiccy',
+    component: Digiccy,
+    meta: {
+        activeItem: 'quotes'
+    }
+};
+
+export default [ quotesRoute, DigiccyRoute ]

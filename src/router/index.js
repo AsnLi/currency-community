@@ -6,6 +6,7 @@ import NewsRoute from './news';
 import IncidentRoute from './incident'
 import CircleRoute from './circle'
 import QuotesRoute from './quotes'
+import ToolRoute from './tool'
 
 import store from '@/store';
 Vue.use(Router)
@@ -16,7 +17,7 @@ const routes = [{
     name: 'home'
   }
 },
-  ...HomeRoute.concat(NewsRoute, IncidentRoute, CircleRoute, QuotesRoute)
+  ...HomeRoute.concat(NewsRoute, IncidentRoute, CircleRoute, QuotesRoute, ToolRoute)
 ];
 
 const router = new Router({

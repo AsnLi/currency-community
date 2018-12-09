@@ -17,7 +17,7 @@
 
 <script>
 export default {
- name: "hotTalent",
+ name: "HotTalent",
  components:{},
  props:{},
  data(){

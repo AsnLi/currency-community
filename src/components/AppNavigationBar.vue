@@ -5,26 +5,50 @@
         <img src="../assets/logo.png" alt="Logo" srcset="">
         <el-menu  :default-active="activeIndex" 
                   mode="horizontal" 
-                  @select="handleSelect"
                   class="nav-menu" 
                   text-color="#000"
                   router>
-          <el-menu-item v-for="item in navlist" :key="item.path" v-if="!item.submenu" :index="item.path">
-            {{item.title}}
+          <el-menu-item v-for="menuItem in navlist" 
+                        :key="menuItem.path" 
+                        v-if="!menuItem.submenu"
+                        :index="menuItem.path">{{menuItem.title}}
           </el-menu-item>
           <el-submenu index="/quotes_all">
             <template slot="title">工具</template>
-            <el-menu-item index="5-1">知识图谱查询</el-menu-item>
-            <el-menu-item index="5-2">白皮书查重</el-menu-item>
+            <el-menu-item v-for="(menuChildItem, index) in navlist[5].submenu" 
+                          :index="menuChildItem.path" 
+                          :key="index">{{ menuChildItem.title}}
+            </el-menu-item>
           </el-submenu>
         </el-menu>
       </el-col>
       <el-col :span="11" :offset="1">
-          <Search></Search>
+          <div class="flex-center">
+            <Search></Search>
+            <div class="user-count flex-center">
+                <i class="el-icon-bell" style="font-size: 22px; font-weight:bold" @click="goMsgRoute()"></i>
+                <el-dropdown placement="bottom-start">
+                  <span class="el-dropdown-link">
+                    <div class="flex-center"> 
+                      <img src="../assets/firend.png" width="35px" height="35px" class="user-avater">
+                      <b>Asn</b>
+                    </div>
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item v-for="funcItem in userFuncList" :key="funcItem.title" 
+                      @click.native="goViewRoute(funcItem)"> {{funcItem.title}}
+                    </el-dropdown-item>
+                    <el-dropdown-item @click.native="logOut">退出登录</el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+            </div>
+          </div>
+          <el-button round size="medium" style="color: blue; border-color: blue;" @click="goPostView">发帖</el-button>
+          <!-- <Search></Search>
           <div class="user_login">
               <span>没有账号? 立即注册</span>
               <el-button round size="medium" @click="toggleLoginModal">登录</el-button>
-          </div>
+          </div> -->
       </el-col>
   </el-row>
   </el-header>
@@ -32,52 +56,51 @@
 
 <script>
 import { mapState, mapActions} from 'vuex';
+
+const navlist = [{ path: "/home", title: "快讯" },
+                { path: "/news", title: "深度" },
+                { path: "/incident", title: "事件" },
+                { path: "/circle", title: "圈子" },
+                { path: "/quotes", title: "行情" },
+                { path: "/tool", title: "工具", submenu: 
+                  [{path: "/knowledgemap", title: "知识图谱查询"},{path: "/recheck", title: "白皮书查重"}]
+                }];
+
+const userFuncList = [{ path: "/mycount", title: "个人资料" },
+                      { path: "/updatecount", type:"data", title: "编辑资料" },
+                      { path: "/updatecount", type:"passwd",  title: "修改密码" }];
+
 export default {
   name: "app-navigationBar",
   data() {
     return {
       activeIndex: location.pathname,
-      navlist: [
-        {
-          path: "/home",
-          title: "快讯"
-        },
-        {
-          path: "/news",
-          title: "深度"
-        },
-        {
-          path: "/incident",
-          title: "事件"
-        },
-        {
-          path: "/circle",
-          title: "圈子"
-        },
-        {
-          path: "/quotes",
-          title: "行情",
-        },
-        {
-          path: "/tool",
-          title: "工具",
-          submenu: ["选项1", "选项2"]
-        }
-      ],
-    };
+      navlist,
+      userFuncList
+    }
   },
   methods: {
      ...mapActions([
       'toggleLoginModal',
     ]),
-    handleSelect(tab, event) {
-    },
     insertHoldBlock(){
       const elm = this.$refs.topNav.$el
       const holdBlock = document.createElement("header")
       holdBlock.setAttribute("style", "height: 60px")
       holdBlock.setAttribute("id", "holdBlock")
       elm.parentElement.insertBefore(holdBlock, elm)
+    },
+    goViewRoute(oParms){
+      this.$router.push({ path: oParms.path, query: { type: oParms.type }})
+    },
+    goPostView(){
+      this.$router.push({ path:"postcontent"})
+    },
+    goMsgRoute(){
+      this.$router.push({ path:"message"})
+    },
+    logOut(){
+      console.log("退出...")
     }
   },
   mounted () {
@@ -122,6 +145,14 @@ export default {
             margin-right: 10px;
             font-weight: bold;
           }
+      }
+      .user-count{
+        margin-left 25px
+        .user-avater{
+          border-radius: 50%
+          margin-left 10px
+          margin-right 5px
+        }
       }
       .nav-menu{
         font-weight: bold;
