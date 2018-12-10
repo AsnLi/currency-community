@@ -134,7 +134,10 @@
       this.$Bus.$on("flexTime", (toggle)=>{
         this.isShowFlexTime = toggle
       })
-      this.getNewsList()
+      this.$api.sentimentNewsList().then(data => {
+        console.warn(data)
+      })
+      // this.getNewsList()
     },
   }
 </script>

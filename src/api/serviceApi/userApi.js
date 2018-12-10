@@ -1,6 +1,6 @@
 
 import fetch from '../fetch';
-const pathPrefix = "news/";
+const pathPrefix = "api/";
 
 /**
  * 获取用户信息
@@ -11,8 +11,8 @@ const pathPrefix = "news/";
 
 const sentimentNewsList = (parm) => {
     return fetch({
-        url: pathPrefix + 'sentimentNewsList',
-        method: 'post',
+        url: pathPrefix + 'getallclass',
+        method: 'get',
         data: parm
     });
 }

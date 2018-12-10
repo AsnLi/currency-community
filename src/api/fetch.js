@@ -4,7 +4,7 @@ import { SERVER_BASE_URL } from './config';
 export default function fetch (options) {
     return new Promise((resolve, reject) => {
         const instance = axios.create({
-            baseURL: SERVER_BASE_URL,
+            baseURL: '',
             timeout: 15000,
             headers: {
                 'Accept': '*/*',
